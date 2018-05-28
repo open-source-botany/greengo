@@ -1,0 +1,41 @@
+{{ template "header.html" .}}
+
+<h1>Add new Crop</h1>
+
+
+<div class="panel panel-default col-sm-12">
+  <div class="panel-body">
+    {{ if .ErrorTitle}}
+    <p class="bg-danger">
+      {{.ErrorTitle}}: {{.ErrorMessage}}
+    </p>
+    {{end}}
+
+    <form class="form" action="/article/create" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="start_date">Start Date</label>
+        <input type="text" class="form-control" id="start_date" name="start_date" placeholder="04-30-2018">
+      </div>
+      <div class="form-group">
+        <label for="environment">Environment</label>
+        <input type="text" class="form-control" id="environment" name="environment" placeholder="outdoors">
+      </div>
+      <div class="form-group">
+        <label for="qty">Quantity</label>
+        <input type="text" class="form-control" id="qty" name="qty" placeholder="1">
+      </div>
+      <div class="form-group">
+        <label for="environment">Notes</label>
+        <input type="text" class="form-control" id="notes" name="notes" placeholder="Grown in soil.">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+{{ template "footer.html" .}}

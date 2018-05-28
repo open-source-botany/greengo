@@ -1,6 +1,9 @@
 package main
 
-import "errors"
+import (
+	"errors"
+	"strconv"
+)
 
 type crop struct {
 	ID          int    `json:"id"`
@@ -29,4 +32,15 @@ func getCropByID(id int) (*crop, error) {
 		}
 	}
 	return nil, errors.New("Crop not found")
+}
+
+func createNewCrop(name, start_date, environment, qty, notes string) (*crop, error) {
+	if amt, err := strconv.Atoi(qty); err == nil {
+		c := crop{ID: len(cropList) + 1, Name: name, StartDate: start_date, Environment: environment, Qty: amt, Notes: notes}
+
+		cropList = append(cropList, c)
+
+		return &c, nil
+	}
+	return nil, nil
 }

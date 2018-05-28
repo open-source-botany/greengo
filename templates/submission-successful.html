@@ -1,0 +1,9 @@
+{{ template "header.html" .}}
+
+<div>
+  <strong>The crop was successfully added.</strong>
+
+  <a href="/crop/view/{{.payload.ID}}">{{.payload.Name}}</a>
+</div>
+
+{{ template "footer.html" .}}
