@@ -9,36 +9,42 @@ import (
 
 func showIndexPage(c *gin.Context) {
 	crops := getAllCrops()
+	loggedInInterface, _ := c.Get("is_logged_in")
+	loggedIn := loggedInInterface.(bool)
 	c.HTML(
 		http.StatusOK,
 		"index.html",
 		gin.H{
-			"title":   "Home Page",
-			"payload": crops,
+			"title":        "Home Page",
+			"payload":      crops,
+			"is_logged_in": loggedIn,
 		},
 	)
 
 }
 
 func getCrop(c *gin.Context) {
+	loggedInInterface, _ := c.Get("is_logged_in")
+	loggedIn := loggedInInterface.(bool)
 	if cropID, err := strconv.Atoi(c.Param("crop_id")); err == nil {
 		if crop, err := getCropByID(cropID); err == nil {
 			c.HTML(
 				http.StatusOK,
 				"crop.html",
 				gin.H{
-					"title":   crop.Name,
-					"payload": crop,
+					"title":        crop.Name,
+					"payload":      crop,
+					"is_logged_in": loggedIn,
 				},
 			)
 
 		} else {
-			// If the article is not found, abort with an error
+			// If the crop is not found, abort with an error
 			c.AbortWithError(http.StatusNotFound, err)
 		}
 
 	} else {
-		// If an invalid article ID is specified in the URL, abort with an error
+		// If an invalid crop ID is specified in the URL, abort with an error
 		c.AbortWithStatus(http.StatusNotFound)
 	}
 }
