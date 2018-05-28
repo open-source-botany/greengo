@@ -1,0 +1,9 @@
+{{ template "header.html" .}}
+  {{range .payload }}
+    <a href="/crop/view/{{.ID}}">
+      <h2>{{.Name}}</h2>
+    </a>
+    <p>{{.StartDate}}</p>
+  {{end}}
+
+{{ template "footer.html" .}}
